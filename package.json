@@ -1,0 +1,32 @@
+{
+  "name": "clearskin",
+  "version": "1.0.0",
+  "description": "Find products without common irritants and pore-cloggers",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "start-react": "webpack --config ./webpack.config.js --mode development -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-clowes/clearSkin.git"
+  },
+  "author": "Alison Clowes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a-clowes/clearSkin/issues"
+  },
+  "homepage": "https://github.com/a-clowes/clearSkin#readme",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "express": "^4.17.1",
+    "node": "^16.1.0",
+    "nodemon": "^2.0.7",
+    "puppeteer": "^9.1.1",
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.37.0"
+  }
+}
