@@ -2,34 +2,57 @@ import React from 'react';
 import SearchBar from './components/SearchBar.jsx';
 import ProductList from './components/ProductList.jsx';
 
-import { createWorker } from 'tesseract.js';
+import Tesseract from 'tesseract.js';
 
-const worker = createWorker({
-  logger: m => console.log(m)
-});
+class App extends React.Component {
+  constructor (props) {
+    super(props);
 
-(async () => {
-  await worker.load();
-  await worker.loadLanguage('eng');
-  await worker.initialize('eng');
-  const { data: { text } } = await worker.recognize('https://tesseract.projectnaptha.com/img/eng_bw.png');
-  console.log(text);
-  await worker.terminate();
-})();
+    this.state = {
+      file: '',
+    }
 
-const App = () => (
-  <div>
-    <h1>clearSkin</h1>
-    <input type="file" id="file-1" className="inputfile" />
-    <img id="select-image" src="" />
-    <div id="log">
-      <span id="startPre">
-        <a id="startLink" href="#">Click here to recognize text</a> or choose your own image
-      </span>
-    </div>
-    <SearchBar />
-    <ProductList />
-  </div>
-);
+    this.onClickHandler = this.onClickHandler.bind(this);
+  }
+
+  onClickHandler (e) {
+    e.preventDefault();
+
+    this.setState({ file: 'ingredientsImage'});
+
+    console.log('got here');
+
+    // Tesseract.recognize(
+    //   this.state.file)
+    //   .progress(packet => {
+    //     console.info(packet)
+    //     progressUpdate(packet)
+    //   })
+    //   .then(data => {
+    //     console.log(data)
+    //     progressUpdate({status: 'done', data: data })
+      // })
+  }
+
+  render () {
+    return (
+     <div>
+       <h1>clearSkin</h1>
+       <form>
+          <label htmlFor="ingredient image">Upload an image of ingredients: </label>
+          <input  type="file"
+                  id="ingredientsImage" name="ingredientsImage" />
+            {/* Accepts bmp, jpg, png, pbm file types. */}
+          <input
+            type="submit"
+            onClick={this.onClickHandler}
+            value="Upload Image"/>
+       </form>
+       <SearchBar />
+       <ProductList />
+     </div>
+   );
+  }
+}
 
 export default App;

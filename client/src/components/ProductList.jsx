@@ -8,7 +8,7 @@ let ProductList = () => (
         <h3>Product Name: </h3>
         <p>Brand: </p>
         <p>Category: </p>
-        <p>Passed: </p>
+        <p>Approved: </p>
       </li>
     </ul>
   </div>
