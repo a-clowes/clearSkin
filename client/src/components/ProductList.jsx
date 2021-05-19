@@ -6,12 +6,9 @@ let ProductList = () => (
     <ul>
       <li>
         <h3>Product Name: </h3>
-        <p>Passed: </p>
-        <p>Product description</p>
-        <p>Cost: </p>
-        <p>Link: </p>
-        <p>Reviews: </p>
+        <p>Brand: </p>
         <p>Category: </p>
+        <p>Passed: </p>
       </li>
     </ul>
   </div>
