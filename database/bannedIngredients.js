@@ -1,5 +1,7 @@
+const pool = require('./config.js');
+
 let ingredients = [
-  'Acetylated Lanolin',
+  // 'Acetylated Lanolin',
   'Acetylated Lanolin Alcohol',
   'Algae Extract',
   'Algin',
@@ -88,3 +90,20 @@ let ingredients = [
   'Xylene'
 ];
 
+let seed = (list) => {
+
+  list.forEach(ingredient => {
+    const queryString = `INSERT INTO ingredients (name, banned)
+    VALUES ($1, true);`
+
+    pool.query(queryString, [ingredient], (err, results) => {
+      if (err) {
+        console.log('error seeding ingredient data', err);
+      } else {
+        console.log('success');
+      }
+    });
+  })
+}
+
+seed(ingredients);
