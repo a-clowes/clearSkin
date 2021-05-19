@@ -9,29 +9,32 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      file: '',
+      file: null,
     }
 
-    this.onClickHandler = this.onClickHandler.bind(this);
+    this.onFileChangeHandler = this.onFileChangeHandler.bind(this);
+    this.onFileUploadHandler = this.onFileUploadHandler.bind(this);
   }
 
-  onClickHandler (e) {
+  onFileChangeHandler (e) {
+    this.setState({ file: e.target.files[0].name });
+  }
+
+  onFileUploadHandler (e) {
     e.preventDefault();
 
-    this.setState({ file: 'ingredientsImage'});
+    console.log(this.state.file);
 
-    console.log('got here');
-
-    // Tesseract.recognize(
-    //   this.state.file)
-    //   .progress(packet => {
-    //     console.info(packet)
-    //     progressUpdate(packet)
-    //   })
-    //   .then(data => {
-    //     console.log(data)
-    //     progressUpdate({status: 'done', data: data })
-      // })
+    Tesseract.recognize(
+      this.state.file)
+      .progress(packet => {
+        console.info(packet)
+        progressUpdate(packet)
+      })
+      .then(data => {
+        console.log(data)
+        progressUpdate({status: 'done', data: data })
+      })
   }
 
   render () {
@@ -41,11 +44,12 @@ class App extends React.Component {
        <form>
           <label htmlFor="ingredient image">Upload an image of ingredients: </label>
           <input  type="file"
-                  id="ingredientsImage" name="ingredientsImage" />
+                  id="ingredientsImage" name="ingredientsImage"
+                  onChange={this.onFileChangeHandler} />
             {/* Accepts bmp, jpg, png, pbm file types. */}
           <input
             type="submit"
-            onClick={this.onClickHandler}
+            onClick={this.onFileUploadHandler}
             value="Upload Image"/>
        </form>
        <SearchBar />
