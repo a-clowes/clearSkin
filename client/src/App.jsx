@@ -17,7 +17,7 @@ class App extends React.Component {
   }
 
   onFileChangeHandler (e) {
-    this.setState({ file: e.target.files[0].name });
+    this.setState({ file: e.target.files[0] });
   }
 
   onFileUploadHandler (e) {
@@ -27,13 +27,8 @@ class App extends React.Component {
 
     Tesseract.recognize(
       this.state.file)
-      .progress(packet => {
-        console.info(packet)
-        progressUpdate(packet)
-      })
-      .then(data => {
-        console.log(data)
-        progressUpdate({status: 'done', data: data })
+      .then(result => {
+        console.log(result.data.text);
       })
   }
 
