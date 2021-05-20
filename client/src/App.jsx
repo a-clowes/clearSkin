@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBar from './components/SearchBar.jsx';
 import ProductList from './components/ProductList.jsx';
-
+import axios from 'axios';
 import Tesseract from 'tesseract.js';
 
 class App extends React.Component {
@@ -13,6 +13,9 @@ class App extends React.Component {
       brand: '',
       category: '',
       file: null,
+      ingredients: '',
+      approved: '',
+      loading: null
     }
 
     this.onFileChangeHandler = this.onFileChangeHandler.bind(this);
@@ -34,12 +37,29 @@ class App extends React.Component {
     e.preventDefault();
 
     console.log(this.state.file);
-
+    this.setState({ loading: true });
     Tesseract.recognize(
       this.state.file)
       .then(result => {
-        console.log(result.data.text);
+        this.setState({ ingredients: result.data.text });
+
+        axios.post('/products', {
+          name: this.state.name,
+          brand: this.state.brand,
+          category: this.state.category,
+          ingredients: this.state.ingredients
+        })
+        .then(res => {
+          this.setState({
+            loading: false,
+            approved: res.body
+          })
+        })
+        .catch(err => {
+          throw err;
+        })
       })
+
   }
 
   render () {
@@ -54,17 +74,20 @@ class App extends React.Component {
           <input  type="text"
                   name="name"
                   onChange={this.onChangeHandler}
-                  value={this.state.name} />
+                  value={this.state.name}
+                  required />
           <label>Brand: </label>
           <input  type="text"
                   name="brand"
                   onChange={this.onChangeHandler}
-                  value={this.state.brand} />
+                  value={this.state.brand}
+                  required />
           <label>Category: </label>
           <input  type="text"
                   name="category"
                   onChange={this.onChangeHandler}
-                  value={this.state.category} />
+                  value={this.state.category}
+                  required />
           <input  type="file"
                   id="ingredientsImage" name="ingredientsImage"
                   onChange={this.onFileChangeHandler} />

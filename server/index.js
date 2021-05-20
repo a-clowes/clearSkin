@@ -12,6 +12,10 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static('/Users/alisonclowes/HR_SEI2/clearSkin/client/dist'));
 
+app.post('/products', (req, res) => {
+    queries.postProduct(req.body, res.send);
+})
+
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });

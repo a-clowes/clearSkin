@@ -97,7 +97,7 @@ let seed = (list) => {
     VALUES ($1, false);`
 
     ingredient = ingredient.toLowerCase();
-    pool.query(queryString, [ingredient], (err, results) => {
+    pool.query(queryString, [ingredient], (err) => {
       if (err) {
         console.log('error seeding ingredient data', err);
       } else {
