@@ -12,8 +12,24 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static('/Users/alisonclowes/HR_SEI2/clearSkin/client/dist'));
 
+app.get('/products/approved', (req, res) => {
+  queries.getApprovedProducts((err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(data);
+    }
+  });
+})
+
 app.post('/products', (req, res) => {
-    queries.postProduct(req.body, res.send);
+    queries.postProduct(req.body, (err, data) => {
+      if (err) {
+        throw err;
+      } else {
+        res.send(data);
+      }
+    });
 })
 
 app.listen(port, () => {

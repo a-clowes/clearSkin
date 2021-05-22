@@ -13,26 +13,27 @@ const SearchBar = () => {
   // }, [query]);
 
   return (
-    <div
-      id="searchContainer"
-    >
-      <form id="searchForm">
-        <label className="visually-hidden">
-          Search for products
-        </label>
-        <input
-          id="searchQuery"
-          type="text"
-          // value={query}
-          onChange={handleSearchBarChange}
-          placeholder="Search Products"
-        />
-        <i
-          className="fas fa-search"
-          id="searchAddIcon"
-        />
-      </form>
-    </div>
+    null
+    // <div
+    //   id="searchContainer"
+    // >
+    //   <form id="searchForm">
+    //     <label className="visually-hidden">
+    //       Search for products
+    //     </label>
+    //     <input
+    //       id="searchQuery"
+    //       type="text"
+    //       // value={query}
+    //       onChange={handleSearchBarChange}
+    //       placeholder="Search Products"
+    //     />
+    //     <i
+    //       className="fas fa-search"
+    //       id="searchAddIcon"
+    //     />
+    //   </form>
+    // </div>
   );
 };
 
